@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         val myString3 = myString+" "+myString2
         //println(myString3)
 
-        // Enteros (Byte, Shoert, Int, Long)
+        // Enteros (Byte, Short, Int, Long)
         var myInt: Int = 1
         var myInt2 = 2
         var myInt3 = myInt + myInt2
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
     fun nullSafety()
     {
         //var myString = "Mi String"
-        //myString = null      herror de compilacion
+        //myString = null      error de compilacion
         var mySafetyString: String? = "Mi safety string"
         mySafetyString = null // No da error de compilacion
 
