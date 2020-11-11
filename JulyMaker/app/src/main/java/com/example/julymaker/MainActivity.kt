@@ -26,6 +26,24 @@ class MainActivity : AppCompatActivity() {
         // Leccion 4
         //sentenciaWhen()
 
+        // Leccion 5
+        //arrays()
+
+        // Leccion 6
+        //diccionarios()
+
+        // Leccion 7
+        //bucles()
+
+        // Leccion 8
+        //nullSafety()
+
+        // Leccion 9
+        //funciones()
+
+        // Leccion 10
+        clases()
+
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -107,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
         if(myNumber < 10 && myNumber > 5)
         {
-            println("$myNumber es menor que 10")
+            println("${myNumber} es menor que 10")
         } else {
             println("$myNumber es mayor que 10")
         }
@@ -128,9 +146,154 @@ class MainActivity : AppCompatActivity() {
         val country = "España"
 
         when (country){
-            "España" ->{
-
+            "España", "Mexico" ->{
+                println("El idioma es Español")
+            } "EEUU" ->{
+                println("El idioma es Inglés")
+            } else ->{
+                println("No conocemos el idioma")
             }
         }
+
+        println("")
+    }
+
+    /* Tipo array */
+    fun arrays()
+    {
+        val name = "July"
+        val surname = "Maker"
+
+        // Ordenado y repetido
+        val myArray = arrayListOf<String>()
+        myArray.add(name)
+        myArray.add(surname)
+        println(myArray)
+
+        myArray.addAll(listOf("Hola"," bienvenidos a esta app"))
+
+        val myName = myArray[0]
+        myArray[1] = "maker"
+        myArray.removeAt(3)
+
+        myArray.forEach{
+            println(it)
+        }
+
+        myArray.last()
+        myArray.sort()
+        myArray.count()
+        myArray.clear()
+    }
+
+    /* Tipo diccionario */
+    fun diccionarios()
+    {
+        var myMap: Map<String,Int> = mapOf() //Vacio {}
+
+        // No existe orden y 1 sola aparicion
+        myMap = mapOf("July" to 1, "Pedro" to 2, "Sara" to 5)
+
+        var myMap2 = mutableMapOf("July" to 1, "Pedro" to 2, "Sara" to 5)
+        myMap2["Ana"] = 7
+        myMap2.put("Maria", 8)
+
+        myMap2.remove("Ana")
+        println(myMap2)
+    }
+
+    /* Tipo for/while */
+    fun bucles()
+    {
+        val myArray: List<String> = listOf("Hola", "makers", "este es mi array")
+        val myMap:MutableMap<String, Int> = mutableMapOf("July" to 1, "Pedro" to 2, "Sara" to 5)
+
+        //For
+        for(myString in myArray){ println(myString) }
+
+        for(myElement in myMap){ println("${myElement.key}-${myElement.value}") }
+
+        for(x in 0..10) { println(x) }              // Hasta 10
+        for(x in 0 until 10) { println(x) }         // Hasta 9
+        for(x in 0..10 step 2) { println(x) }       // Incremento + 2
+        for(x in 10 downTo 0 step 3) { println(x) }  // Hacia atras
+
+        //While
+        var x = 0
+        while( x < 10){ x++}
+    }
+
+    /* Null Safety */
+    fun nullSafety()
+    {
+        //var myString = "Mi String"
+        //myString = null      herror de compilacion
+        var mySafetyString: String? = "Mi safety string"
+        mySafetyString = null // No da error de compilacion
+
+        print(mySafetyString)
+
+        if(mySafetyString != null){println(mySafetyString!!)}
+
+        // Safe call
+        println(mySafetyString!!.length)
+        println(mySafetyString?.length)
+
+        mySafetyString?.let{
+            println(it)  // it es mySafetyString
+        } ?: run{
+            println(mySafetyString!!)
+        }
+    }
+
+    /* Funciones */
+    fun funciones()
+    {
+        //Imprime 3 veces hola
+        sayHello()
+        sayHello()
+        sayHello()
+
+        sayMyNameAndAge("Julio", 36)
+        sayMyNameAndAge("Raquel", 30)
+
+        var suma = sumarNumeros(2,3)
+
+        var suma2 = sumarNumeros(2, sumarNumeros(10,4))
+    }
+
+    fun sayHello()
+    {
+        println("Hola!")
+    }
+
+    fun sayMyNameAndAge(name:String, edad:Int)
+    {
+        println("Hola mi nombre es ${name} y tengo ${edad} años")
+    }
+
+    fun sumarNumeros(num1:Int, num2:Int): Int
+    {
+        return num1 + num2
+    }
+
+    /* Clases */
+    fun clases()
+    {
+        val july = Programer("July",
+                        36,
+                        arrayOf(Programer.Language.KOTLIN, Programer.Language.Cpp))
+
+        println(july.name)
+        july.edad = 35 // edad es de tipo var
+
+        val raquel = Programer("Raquel",
+                30,
+                      arrayOf(Programer.Language.TODO, Programer.Language.Cpp),
+                      arrayOf(july))
+        july.code()
+        raquel.code()
+
+        println("${raquel.friend?.first()?.name} es amigo de ${raquel.name}")
     }
 }
