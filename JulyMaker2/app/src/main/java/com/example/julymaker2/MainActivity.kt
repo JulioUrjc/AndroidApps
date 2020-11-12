@@ -15,7 +15,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         // Enum clases
-        enumClasses()
+        //enumClasses()
+
+        // Nested and Inner Classes
+        //nestedAndInnerClasses()
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -40,8 +43,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Leccion 1
-    enum class Direction{
-        NORTH, SOUTH, EAST, WEST;
+    enum class Direction(val dir:Int){
+        NORTH(1), SOUTH(-1), EAST(1), WEST(-1);
 
         fun description() : String{
             return when(this){
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Leccion 1: enum class
     private fun enumClasses()
     {
         var userDirection: Direction? = null
@@ -62,5 +66,20 @@ class MainActivity : AppCompatActivity() {
 
         userDirection.name    // EAST en formato String
         userDirection.ordinal // Posicion del enumerado
+        userDirection.description()
+        userDirection.dir
     }
+
+    // Leccion 2: Nested and Inner Classes
+    private fun nestedAndInnerClasses()
+    {
+        //Clases anidadas (Nested Class)
+        val MyNestedClass = MyNestedAndInnerClass.MyNestedClass()
+        val sum = MyNestedClass.sum(10,5)
+
+        //Clases internas (Inner Class)
+        val myInnerClass = MyNestedAndInnerClass().MyInnerClass()
+        val sumTwo = myInnerClass.sumTwo(10)
+    }
+
 }
