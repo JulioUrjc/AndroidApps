@@ -1,5 +1,6 @@
 package com.july.myfirstapplication2
 
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         //textView.text = "Cambiar el texto"
         //textView.text = getString(R.string.Hello)
+        textView.typeface = Typeface.createFromAsset(assets,"fonts/Starjedi.ttf")
+        textView2.typeface = Typeface.createFromAsset(assets,"fonts/Starjhol.ttf")
 
         //Obtenemos el PreferenceManager
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
