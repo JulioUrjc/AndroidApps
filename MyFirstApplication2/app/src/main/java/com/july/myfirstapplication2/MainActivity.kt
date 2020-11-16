@@ -8,10 +8,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceManager
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_home.*
@@ -21,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private val key = "MY_KEY"
     private val GOOGLE_SIGN_IN = 100
+    private val CALLBACK_MANAGER= CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -39,40 +46,8 @@ class MainActivity : AppCompatActivity() {
         //Setup
         setup()
         sesion()
+        botonesYtexto()
 
-        // Formato de fuentes
-        //textView.text = "Cambiar el texto"
-        //textView.text = getString(R.string.Hello)
-        textView.typeface = Typeface.createFromAsset(assets,"fonts/Starjedi.ttf")
-        textView2.typeface = Typeface.createFromAsset(assets,"fonts/Starjhol.ttf")
-
-        //Obtenemos el PreferenceManager
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-
-        // Recuperar las preferencias
-        getButton.setOnClickListener{
-            val myPref = prefs.getString(key,"No hay un valor para esta clave")
-            myPref?.let{ showAlert(myPref) }
-        }
-
-        // Guarda las preferencias
-        putButton.setOnClickListener{
-            //Modo edicion
-            val editor = prefs.edit()
-
-            editor.putString(key, "Mi valor")
-            editor.apply()
-            showAlert("Hemos guardado el valor $key")
-        }
-
-        // Borra las preferencias
-        delButton.setOnClickListener{
-            val editor = prefs.edit()
-
-            editor.remove(key)
-            editor.apply()
-            showAlert("Hemos borrado el valor $key")
-        }
     }
 
     private fun showAlert(message:String){
@@ -146,6 +121,42 @@ class MainActivity : AppCompatActivity() {
 
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
         }
+
+        //https://developers.facebook.com/
+        // Crear aplicacion-> Configuracion-> Informacion basica
+        // Signo + añadir producto-> Inicio de sesion con facebook-> Android
+        //https://firebase.google.com/docs/auth/android/facebook-login
+        facebookButton.setOnClickListener{
+
+            LoginManager.getInstance().logInWithReadPermissions(this,listOf("email"))
+            LoginManager.getInstance().registerCallback(CALLBACK_MANAGER,
+            object: FacebookCallback<LoginResult>{
+
+                override fun onSuccess(result: LoginResult?) {
+                    result?.let{
+                        val token = it.accessToken
+
+                        val credential = FacebookAuthProvider.getCredential(token.token)
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                            if(it.isSuccessful){
+                                showHome(it.result?.user?.email ?:"", ProviderType.FACEBOOK)
+                            }else{
+                                showAlert("La autenticacion Facebook ha fallado")
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancel() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onError(error: FacebookException?) {
+                    showAlert("Fallo en facebook")
+                }
+            })
+        }
+
     }
 
     override fun onStart() {
@@ -167,6 +178,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        CALLBACK_MANAGER.onActivityResult(requestCode, resultCode, data) //Facebook
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == GOOGLE_SIGN_IN){
@@ -190,6 +203,42 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+        }
+    }
+
+    private fun botonesYtexto(){
+        // Formato de fuentes
+        //textView.text = "Cambiar el texto"
+        //textView.text = getString(R.string.Hello)
+        textView.typeface = Typeface.createFromAsset(assets,"fonts/Starjedi.ttf")
+        textView2.typeface = Typeface.createFromAsset(assets,"fonts/Starjhol.ttf")
+
+        //Obtenemos el PreferenceManager
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        // Recuperar las preferencias
+        getButton.setOnClickListener{
+            val myPref = prefs.getString(key,"No hay un valor para esta clave")
+            myPref?.let{ showAlert(myPref) }
+        }
+
+        // Guarda las preferencias
+        putButton.setOnClickListener{
+            //Modo edicion
+            val editor = prefs.edit()
+
+            editor.putString(key, "Mi valor")
+            editor.apply()
+            showAlert("Hemos guardado el valor $key")
+        }
+
+        // Borra las preferencias
+        delButton.setOnClickListener{
+            val editor = prefs.edit()
+
+            editor.remove(key)
+            editor.apply()
+            showAlert("Hemos borrado el valor $key")
         }
     }
 }

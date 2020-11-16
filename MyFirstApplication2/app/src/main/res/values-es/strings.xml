@@ -4,4 +4,6 @@
     <string name="Hello">Hola Julio !!!</string>
     <string name="Translate">Mi traducción</string>
     <string name="prefs_file">com.july.myfirstapplication2.PREFERENCE_FILE_KEY</string>
+    <string name="facebook_app_id">1071002183321625</string>
+    <string name="fb_login_protocol_scheme">fb1071002183321625</string>
 </resources>

@@ -140,6 +140,20 @@
             android:text="Google"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDarkM" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="13dp" />
+
+        <android.widget.Button
+            android:id="@+id/facebookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableStart="@mipmap/facebook"
+            android:paddingStart="16dp"
+            android:text=" FACEBOOK"
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
