@@ -20,6 +20,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         setup()
         sesion()
         botonesYtexto()
+        notification()
 
     }
 
@@ -239,6 +243,24 @@ class MainActivity : AppCompatActivity() {
             editor.remove(key)
             editor.apply()
             showAlert("Hemos borrado el valor $key")
+        }
+    }
+
+    private fun notification(){
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            it.result?.token?.let{
+                println("Este es el token del dispositivo: ${it}")
+            }
+        }
+
+        // Temas (Topics)
+        FirebaseMessaging.getInstance().subscribeToTopic("tutorial")
+
+        //Recuperar informacion de notificacion
+        val url = intent.getStringExtra("url") // url es una key que se pone en Firebase
+
+        url?.let{
+            println("Ha llegado informacion de una push: ${it}")
         }
     }
 }
