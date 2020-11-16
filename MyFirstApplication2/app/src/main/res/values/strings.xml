@@ -2,4 +2,5 @@
     <string name="app_name">MyFirstApplication2</string>
     <string name="Hello">Hello Julio !!!</string>
     <string name="Translate">My translate</string>
+    <string name="prefs_file">com.july.myfirstapplication2.PREFERENCE_FILE_KEY</string>
 </resources>

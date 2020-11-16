@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/putButton" />
 
     <LinearLayout
-        android:id="@+id/linearL"
+        android:id="@+id/authLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -103,7 +103,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="69dp"
             android:orientation="horizontal">
 
             <android.widget.Button
@@ -126,9 +126,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDarkM"
-                android:textColor="@android:color/white"
-                android:text="Acceder" />
+                android:text="Acceder"
+                android:textColor="@android:color/white" />
         </LinearLayout>
+
+        <android.widget.Button
+            android:id="@+id/googleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableStart="@drawable/common_google_signin_btn_icon_dark"
+            android:paddingStart="16dp"
+            android:text="Google"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDarkM" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
