@@ -41,14 +41,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/cerrarbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorAccent"
+                android:textColor="@color/background"
                 android:text="Cerrar sesion"
-                android:textColor="@android:color/white" />
+                 />
 
         </LinearLayout>
     </LinearLayout>

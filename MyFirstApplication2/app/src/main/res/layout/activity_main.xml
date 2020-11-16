@@ -106,21 +106,26 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/regButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:text="Registrar" />
+                android:background="@color/colorPrimaryM"
+                android:text="Registrar"
+                android:textColor="@android:color/white" />
 
-            <Button
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <android.widget.Button
                 android:id="@+id/logButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorPrimaryDarkM"
                 android:textColor="@android:color/white"
                 android:text="Acceder" />
         </LinearLayout>
