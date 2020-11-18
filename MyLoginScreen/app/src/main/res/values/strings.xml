@@ -2,4 +2,18 @@
     <string name="app_name">MyLoginScreen</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="introduce_tu_nota">Introduce tu nota</string>
+    <string name="guardar">Guardar</string>
+    <string name="borrar">Borrar</string>
+    <string name="crea_nota_primero">Crea nota primero</string>
+    <string name="nota_creada">Nota creada</string>
+    <string name="nota_actualizada">Nota actualizada</string>
+    <string name="nota_no_existe">Nota no existe</string>
+    <string name="nota_borrada">Nota borrada</string>
 </resources>
