@@ -22,18 +22,15 @@ class ContactsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun deleteContact(name: String) {
-        var contact: Contact? = null
 
-        //contacts?.let{
-        //    val size: Int = it.value?.size ?: 0
-        //    var contact:Contact? = null
-        //    for(i in 0..size) {
-        //        contact = it.value?.get(i)
-        //        if(contact?.firstName == name){
-        //            repository.delete(contact)
-        //            break
-        //        }
-        //    }
-        //}
+        contacts?.let{
+            for(contacto in contacts.value!!) {
+                if(contacto?.firstName == name){
+                    repository.delete(contacto)
+                    break
+                }
+            }
+        }
+
     }
 }

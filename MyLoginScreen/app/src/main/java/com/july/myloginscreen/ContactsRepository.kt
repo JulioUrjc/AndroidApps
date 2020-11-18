@@ -26,27 +26,9 @@ class ContactsRepository(application: Application) {
     }
 
     fun delete(contact: Contact) {
-        if (contactDao != null) contactDao.delete(contact)
+        if (contactDao != null) DeleteAsyncTask(contactDao).execute(contact)
     }
 
-    //fun delete(name: String) {
-    //    var contacts = getContacts()
-    //    var contact: Contact? = null
-//
-    //    contacts?.let{
-    //        val size: Int = it.value?.size ?: 0
-    //        var contact:Contact? = null
-    //        for(i in 0..size) {
-    //            contact = it.value?.get(i)
-    //            if(contact?.firstName == name){
-    //                if (contactDao != null)  contactDao.delete(contact)
-    //                break
-    //            }
-    //        }
-    //    }
-//
-//
-    //}
 
     fun getContacts(): LiveData<List<Contact>> {
         return contactDao?.getOrderedAgenda() ?: MutableLiveData<List<Contact>>()
@@ -57,6 +39,16 @@ class ContactsRepository(application: Application) {
         override fun doInBackground(vararg contacts: Contact?): Void? {
             for (contact in contacts) {
                 if (contact != null) contactDao.insert(contact)
+            }
+            return null
+        }
+    }
+
+    private class DeleteAsyncTask(private val contactDao: ContactDao) :
+        AsyncTask<Contact, Void, Void>() {
+        override fun doInBackground(vararg contacts: Contact?): Void? {
+            for (contact in contacts) {
+                if (contact != null) contactDao.delete(contact)
             }
             return null
         }
