@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /**
- * Esta clase devuelve una instancia de la interfaz NotaDao.
+ * Esta clase devuelve una instancia de la interfaz ContactoDao.
  *
  * @author July Maker
  * @version 2020.00

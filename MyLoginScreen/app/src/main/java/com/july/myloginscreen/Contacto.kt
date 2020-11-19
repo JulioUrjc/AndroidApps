@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 
 /**
- * Esta clase contiene un objeto de tipo Nota, con un id y el texto de dicha Nota.
+ * Esta clase contiene un objeto de tipo Contacto, con un id y los datos de contacto.
  *
  * @author July Maker
  * @version 2020.00
